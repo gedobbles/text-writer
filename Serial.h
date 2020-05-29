@@ -13,6 +13,7 @@ class Serial {
 private:
   int serial_port;
   struct termios tty;
+  char read_buf [256];
 
 public:
   Serial (string, int);

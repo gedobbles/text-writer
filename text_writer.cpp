@@ -12,10 +12,17 @@
 #include "Serial.h"
 
 int main(int argc, char const *argv[]) {
-  printf("3D Printer plot writer by gedobbles.\nx to exit\n", );
-  Serial* s = new Serial("/dev/ttyUSB0",250000);
-  s->wln("G28");
-  string input;
+  printf("3D Printer plot writer by gedobbles.\nx to exit\ndevice?[/dev/ttyUSB0] ");
+  string input, device;
+  getline (std::cin, input);
+  if(input == ""){
+    device = "/dev/ttyUSB0";
+  }else{
+    device = input;
+  }
+
+  Serial* s = new Serial(device,250000);
+
   getline (std::cin, input);
   while (input != "x") {
     s->wln(input);

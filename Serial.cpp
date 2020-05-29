@@ -24,7 +24,7 @@ Serial::Serial(string device, int baud){
   tty.c_cflag &= ~PARENB; // Clear parity bit, disabling parity (most common)
   tty.c_cflag &= ~CSTOPB; // Clear stop field, only one stop bit used in communication (most common)
   tty.c_cflag |= CS8; // 8 bits per byte (most common)
-  tty.c_cflag &= ~CRTSCTS; // Disable RTS/CTS hardware flow control (most common)
+  tty.c_cflag &= ~CRTSCTS; // Disable RTS/CTS hardware flow control (most common) //EDIT
   tty.c_cflag |= CREAD | CLOCAL; // Turn on READ & ignore ctrl lines (CLOCAL = 1)
 
   tty.c_lflag &= ~ICANON;
@@ -51,6 +51,7 @@ Serial::Serial(string device, int baud){
   if (tcsetattr(serial_port, TCSANOW, &tty) != 0) {
       printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
   }
+  sleep(3);
 }
 
 Serial::~Serial(){
@@ -63,4 +64,13 @@ void Serial::w(string msg){
 
 void Serial::wln(string msg){
   w(msg + "\n");
+  //Check for response
+  memset(&read_buf, '\0', sizeof(read_buf));
+  int num_bytes;
+  while((num_bytes = read(serial_port, &read_buf, sizeof(read_buf)))==0);
+  if(num_bytes < 0){
+    printf("! Read error. Please check connection");
+  }else{
+    printf("%s", read_buf);
+  }
 }
