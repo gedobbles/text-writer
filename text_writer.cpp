@@ -3,7 +3,6 @@
 #include <string.h>
 #include <string>
 #include <iostream>
-#include <regex>
 
 // Linux headers
 #include <fcntl.h> // Contains file controls like O_RDWR
@@ -29,15 +28,12 @@ int main(int argc, char const *argv[]) {
   //say something to get attention
   s->wln("M117 Ready to plot!");
 
-  std::regex gcode("[GMT].*");
-  std::regex text(":.*");
-
   getline (std::cin, input);
   while (input != "x") {
-    if(std::regex_match(input, gcode)){
+    if(input.c_str()[0] == 'G' || input.c_str()[0] == 'M' || input.c_str()[0] == 'T'){
       s->wln(input);
     }
-    if(std::regex_match(input, text)){
+    if(input.c_str()[0] == ':'){
       ;//printer.w(input);
     }
     getline (std::cin, input);
