@@ -1,10 +1,9 @@
 OBJ = text_writer.o
 
-all:
-	text_writer
+all: text_writer
 
-text_writer:$OBJ
+text_writer: $(OBJ)
 	gcc -o $@ $<
 
-%.o:%.c
+%.o: %.c
 	gcc -c -o $@ $<
