@@ -1,9 +1,6 @@
-OBJ = text_writer.o
+SRC = Serial.cpp text_writer.cpp
 
 all: text_writer
 
-text_writer: $(OBJ)
-	gcc -o $@ $<
-
-%.o: %.c
-	gcc -c -o $@ $<
+text_writer: $(SRC)
+	g++ -o $@ $(SRC)
