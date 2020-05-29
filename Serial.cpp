@@ -63,6 +63,7 @@ void Serial::w(string msg){
 }
 
 void Serial::wln(string msg){
+  printf("%s\n", msg.c_str());
   w(msg + "\n");
   //Check for response
   memset(&read_buf, '\0', sizeof(read_buf));

@@ -1,4 +1,4 @@
-SRC = Serial.cpp text_writer.cpp
+SRC = Serial.cpp Printer.cpp text_writer.cpp
 
 all: text_writer
 

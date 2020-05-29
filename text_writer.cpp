@@ -11,6 +11,7 @@
 #include <unistd.h> // write(), read(), close()
 
 #include "Serial.h"
+#include "Printer.h"
 
 int main(int argc, char const *argv[]) {
   printf("3D Printer plot writer by gedobbles.\nx to exit\ndevice?[/dev/ttyUSB0] ");
@@ -28,13 +29,24 @@ int main(int argc, char const *argv[]) {
   //say something to get attention
   s->wln("M117 Ready to plot!");
 
+  Printer* p = NULL;
+
   getline (std::cin, input);
   while (input != "x") {
     if(input.c_str()[0] == 'G' || input.c_str()[0] == 'M' || input.c_str()[0] == 'T'){
       s->wln(input);
     }
     if(input.c_str()[0] == ':'){
-      ;//printer.w(input);
+      if(p == NULL){  //create Printer Obj on first occurrance
+        p = new Printer(s);
+      }
+      p->pStr(input.c_str());
+    }
+    if(input.c_str()[0] == ';'){
+      if(p == NULL){  //create Printer Obj on first occurrance
+        p = new Printer(s);
+      }
+      p->newline();
     }
     getline (std::cin, input);
   }
