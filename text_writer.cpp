@@ -7,7 +7,6 @@
 // Linux headers
 #include <fcntl.h> // Contains file controls like O_RDWR
 #include <errno.h> // Error integer and strerror() function
-#include <termios.h> // Contains POSIX terminal control definitions
 #include <unistd.h> // write(), read(), close()
 
 #include "Serial.h"
@@ -27,6 +26,7 @@ int main(int argc, char const *argv[]) {
   //create Serial
   Serial* s = new Serial(device,250000);
   //say something to get attention
+  s->wln("M117 ...");
   s->wln("M117 Ready to plot!");
 
   Printer* p = NULL;
