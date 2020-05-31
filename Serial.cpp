@@ -69,23 +69,29 @@ void Serial::wln(string msg){
   w(msg + "\n");                //Send the command
 
   //Check for response
+  sleep(0.05);  //but wait before
   memset(&read_buf, '\0', sizeof(read_buf));
   int num_bytes;
   num_bytes = read(serial_port, &read_buf, sizeof(read_buf));
   printf("%s", read_buf);
   //we need an "ok" here
-  int tries = 10;
   while(((string) read_buf).find("ok") == string::npos){  //while no ok in response
-    //if there is nothing after half a second...
-    while((num_bytes = read(serial_port, &read_buf, sizeof(read_buf)))==0){
-      tries --;
-      sleep(0.05);
-      if(tries == 0){
-        tries = 16;
-        w("M118 E1 ...\n");  //...we do something to provoke an ok (print nothing to serial)
-      }
+    if (((string) read_buf).find("k\n") != string::npos) {  //this also counts
+      printf("\n!!! Bad ok !!!  ");
+      break;
     }
-    if(num_bytes < 0){
+
+    //try to get next line
+    int i = 20;
+    while((num_bytes = read(serial_port, &read_buf, sizeof(read_buf)))==0){
+      i--;
+      if(i == 0){
+        break;
+      }
+      sleep(0.05);
+      printf(".");
+    }
+    if(num_bytes <= 0){
       printf("! Read error. Please check connection");
     }else{
       printf("%s", read_buf);
