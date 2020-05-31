@@ -50,8 +50,10 @@ Serial::Serial(string device, int baud){
   if (ioctl(serial_port, TCSETS2, &tty) != 0) {
       printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
   }
-  //write(serial_port,"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",100);
-  //w("\n");
+  write(serial_port,"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",100);
+  w("\n");
+  sleep(6);     //wait for reboot
+  read(serial_port, &read_buf, sizeof(read_buf)); //empty text
 }
 
 Serial::~Serial(){
@@ -63,26 +65,26 @@ void Serial::w(string msg){
 }
 
 void Serial::wln(string msg){
-  printf("%s\n", msg.c_str());
+  printf("%s   \t", msg.c_str());
   w(msg + "\n");                //Send the command
 
   //Check for response
   memset(&read_buf, '\0', sizeof(read_buf));
   int num_bytes;
   num_bytes = read(serial_port, &read_buf, sizeof(read_buf));
+  printf("%s", read_buf);
   //we need an "ok" here
   int tries = 10;
-  while(((string) read_buf).find("ok") == string::npos){
+  while(((string) read_buf).find("ok") == string::npos){  //while no ok in response
     //if there is nothing after half a second...
     while((num_bytes = read(serial_port, &read_buf, sizeof(read_buf)))==0){
       tries --;
       sleep(0.05);
       if(tries == 0){
         tries = 16;
-        w("M117 ???\n");  //...we do something to provoke an ok
+        w("M118 E1 ...\n");  //...we do something to provoke an ok (print nothing to serial)
       }
     }
-    w("M117 ...\n");
     if(num_bytes < 0){
       printf("! Read error. Please check connection");
     }else{

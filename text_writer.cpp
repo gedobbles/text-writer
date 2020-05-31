@@ -23,14 +23,16 @@ int main(int argc, char const *argv[]) {
   }else{
     device = input;
   }
+  printf("Waiting for the printer to come online...\n");
   //create Serial
   Serial* s = new Serial(device,250000);
   //say something to get attention
-  s->wln("M117 ...");
+  //s->wln("M117 ...");
   s->wln("M117 Ready to plot!");
 
   Printer* p = NULL;
 
+  printf(">");
   getline (std::cin, input);
   while (input != "x") {
     if(input.c_str()[0] == 'G' || input.c_str()[0] == 'M' || input.c_str()[0] == 'T'){
@@ -48,6 +50,7 @@ int main(int argc, char const *argv[]) {
       }
       p->newline();
     }
+    printf(">");
     getline (std::cin, input);
   }
   s->wln("M117 Bye!");
