@@ -26,7 +26,7 @@ private:
 
   Serial* s;
 
-  bool chkBounds(float, float);
+  bool chkBounds(float, float);                 //Check if still on paper
 
   //because its very long...
   #include "Printer_chars.h"
@@ -34,8 +34,9 @@ private:
 public:
   Printer (Serial*);
   virtual ~Printer ();
-  void pChr(char);    //Print one Char
-  bool pStr(const char*);   //Print a String
-  bool seek(float, float);
-  void newline();
+  void pChr(char);                              //Print one Char
+  bool pStr(const char*);                       //Print a String
+  bool seek(float, float);                      //Seek to a position on the paper
+  void setBounds(float, float, float, float);   //Set paper bounds
+  void newline(char);                               //Make a newline
 };

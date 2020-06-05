@@ -20,6 +20,13 @@ bool Printer::chkBounds(float sx, float sy){
   return true;
 }
 
+void Printer::setBounds(float xmin, float ymin, float xmax, float ymax){
+  this->X_MIN = xmin;
+  this->Y_MIN = ymin;
+  this->X_MAX = xmax;
+  this->Y_MAX = ymax;
+}
+
 bool Printer::seek(float sx, float sy){
   if(!chkBounds(sx, sy)){
     return false;

@@ -11,6 +11,7 @@
 
 #include "Serial.h"
 #include "Printer.h"
+#include "config.h"
 
 int main(int argc, char const *argv[]) {
   printf("3D Printer plot writer by gedobbles.\nx to exit\ndevice?[/dev/ttyUSB0] ");
@@ -35,16 +36,22 @@ int main(int argc, char const *argv[]) {
   printf(">");
   getline (std::cin, input);
   while (input != "x") {
+
+    //If its a G/M/T-Code just pass it on
     if(input.c_str()[0] == 'G' || input.c_str()[0] == 'M' || input.c_str()[0] == 'T'){
       s->wln(input);
     }
-    if(input.c_str()[0] == ':'){
+
+    //If preceded by TEXT_START_CHAR, print as text
+    if(input.c_str()[0] == TEXT_START_CHAR){
       if(p == NULL){  //create Printer Obj on first occurrance
         p = new Printer(s);
       }
       p->pStr(input.c_str());
     }
-    if(input.c_str()[0] == ';'){
+
+    //If NEWLINE_CHAR make newline
+    if(input.c_str()[0] == NEWLINE_CHAR){
       if(p == NULL){  //create Printer Obj on first occurrance
         p = new Printer(s);
       }
