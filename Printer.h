@@ -37,6 +37,6 @@ public:
   void pChr(char);                              //Print one Char
   bool pStr(const char*);                       //Print a String
   bool seek(float, float);                      //Seek to a position on the paper
-  void setBounds(float, float, float, float);   //Set paper bounds
   void newline(char);                               //Make a newline
+  void configure(int, string);
 };

@@ -1,4 +1,5 @@
 #include "Printer.h"
+#include "config.h"
 
 
 Printer::Printer(Serial* s){
@@ -20,11 +21,22 @@ bool Printer::chkBounds(float sx, float sy){
   return true;
 }
 
-void Printer::setBounds(float xmin, float ymin, float xmax, float ymax){
-  this->X_MIN = xmin;
-  this->Y_MIN = ymin;
-  this->X_MAX = xmax;
-  this->Y_MAX = ymax;
+void Printer::configure(int field, string value){
+  switch (field) {
+    case CONFIG_FIELD_XMIN :
+      this->X_MIN = stof(value);
+      break;
+    case CONFIG_FIELD_XMAX :
+      this->X_MAX = stof(value);
+      break;
+    case CONFIG_FIELD_YMIN :
+      this->Y_MIN = stof(value);
+      break;
+    case CONFIG_FIELD_YMAX :
+      this->Y_MAX = stof(value);
+      break;
+  }
+  this->seek(this->px, this->py);
 }
 
 bool Printer::seek(float sx, float sy){
