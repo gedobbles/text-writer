@@ -66,6 +66,6 @@ void Printer::pChr(char c){
   s->wln("G0 X"+std::to_string(x)+" Y"+std::to_string(y)+" F3000");
 }
 
-void Printer::newline(){
-  seek(0,py+6.5);
+void Printer::newline(char anz){
+  seek(0,py+6.5*anz);
 }

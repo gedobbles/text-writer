@@ -48,7 +48,12 @@ int main(int argc, char const *argv[]) {
       if(p == NULL){  //create Printer Obj on first occurrance
         p = new Printer(s);
       }
-      p->newline();
+      char c1 = input.c_str()[1];
+      if(c1 > '0' && c1 <= '9'){
+        p->newline(c1-'0');
+      }else{
+        p->newline(1);
+      }
     }
     printf(">");
     getline (std::cin, input);
