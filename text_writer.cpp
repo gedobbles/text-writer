@@ -101,7 +101,7 @@ int main(int argc, char const *argv[]) {
         }
 
         #ifdef DBG
-        printf("%d %s\n", fieldnr, configfields[i+1].c_str());
+        printf("Config: %d %s\n", fieldnr, configfields[i+1].c_str());
         #endif
 
         if(fieldnr != CONFIG_FIELD_NONE){

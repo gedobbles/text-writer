@@ -46,7 +46,7 @@ bool Printer::seek(float sx, float sy){
   s->wln("G90");  //absolute Positioning, just in Case
   px = sx;
   py = sy;
-  x = px;
+  x = X_MIN + px;
   y = Y_MAX - py;
   s->wln("G0 Z"+std::to_string(Z_MOVE));
   s->wln("G0 X"+std::to_string(x)+" Y"+std::to_string(y)+" F4500");
