@@ -11,6 +11,8 @@
 #define CONFIG_FIELD_YMIN 2
 #define CONFIG_FIELD_XMAX 3
 #define CONFIG_FIELD_YMAX 4
+#define CONFIG_FIELD_ZTRAVEL 5
+#define CONFIG_FIELD_ZWRITE 6
 
 //configuration field strings
 #define CONFIG_FIELD_NONE_STR ""  //not needed
@@ -18,5 +20,6 @@
 #define CONFIG_FIELD_YMIN_STR "YMIN"
 #define CONFIG_FIELD_XMAX_STR "XMAX"
 #define CONFIG_FIELD_YMAX_STR "YMAX"
-
+#define CONFIG_FIELD_ZTRAVEL_STR "ZMOVE"
+#define CONFIG_FIELD_ZWRITE_STR "ZWRITE"
 #endif

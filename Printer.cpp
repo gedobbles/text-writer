@@ -35,6 +35,12 @@ void Printer::configure(int field, string value){
     case CONFIG_FIELD_YMAX :
       this->Y_MAX = stof(value);
       break;
+    case CONFIG_FIELD_ZTRAVEL :
+      this->Z_MOVE = stof(value);
+      break;
+    case CONFIG_FIELD_ZWRITE :
+      this->Z_WRITE = stof(value);
+      break;
   }
   this->seek(this->px, this->py);
 }

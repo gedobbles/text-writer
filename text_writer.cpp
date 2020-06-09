@@ -99,6 +99,12 @@ int main(int argc, char const *argv[]) {
         if(configfields[i] == CONFIG_FIELD_YMAX_STR){
           fieldnr = CONFIG_FIELD_YMAX;
         }
+        if(configfields[i] == CONFIG_FIELD_ZTRAVEL_STR){
+          fieldnr = CONFIG_FIELD_ZTRAVEL;
+        }
+        if(configfields[i] == CONFIG_FIELD_ZWRITE_STR){
+          fieldnr = CONFIG_FIELD_ZWRITE;
+        }
 
         #ifdef DBG
         printf("Config: %d %s\n", fieldnr, configfields[i+1].c_str());
