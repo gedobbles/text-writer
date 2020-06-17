@@ -1,3 +1,4 @@
 *.o
 text_writer
 text_writer.dbg
+.gitsh
