@@ -83,7 +83,7 @@ bool Printer::pStr(const char* msg) {
 
 void Printer::pChr(char c){
   x += pChars[c].length;
-  s->wln("G0 Z"+std::to_string(Z_WRITE+2)+" F600");
+  s->wln("G0 Z"+std::to_string(Z_WRITE+2)+" F1400");
   s->wln("G91");
   std::string text = pChars[c].moves;
   std::vector<std::string> results;
