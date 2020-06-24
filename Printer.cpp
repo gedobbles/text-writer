@@ -98,5 +98,5 @@ void Printer::pChr(char c){
 }
 
 void Printer::newline(char anz){
-  seek(0,py+6.5*anz);
+  seek(0,py+7.5*anz);
 }
