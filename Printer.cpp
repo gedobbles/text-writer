@@ -41,6 +41,12 @@ void Printer::configure(int field, string value){
     case CONFIG_FIELD_ZWRITE :
       this->Z_WRITE = stof(value);
       break;
+    case CONFIG_FIELD_X :
+      this->px = stof(value);
+      break;
+    case CONFIG_FIELD_Y :
+      this->py = stof(value);
+      break;
   }
   this->seek(this->px, this->py);
 }

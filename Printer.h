@@ -17,7 +17,7 @@ class Printer {
 private:
   float X_MIN = 0.0; //Writing area dims
   float X_MAX = 140.0;
-  float Y_MIN = 90.0;
+  float Y_MIN = 65.0;
   float Y_MAX = 195.0;
   float Z_WRITE = 6.0;
   float Z_MOVE  = 9.0;

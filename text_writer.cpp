@@ -105,6 +105,12 @@ int main(int argc, char const *argv[]) {
         if(configfields[i] == CONFIG_FIELD_ZWRITE_STR){
           fieldnr = CONFIG_FIELD_ZWRITE;
         }
+        if(configfields[i] == CONFIG_FIELD_X_STR){
+          fieldnr = CONFIG_FIELD_X;
+        }
+        if(configfields[i] == CONFIG_FIELD_Y_STR){
+          fieldnr = CONFIG_FIELD_Y;
+        }
 
         #ifdef DBG
         printf("Config: %d %s\n", fieldnr, configfields[i+1].c_str());
