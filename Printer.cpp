@@ -72,7 +72,7 @@ bool Printer::pStr(const char* msg) {
   for (int i = 1; txt[i] != 0; i++) {
     len += pChars[msg[i]].length;
   }
-  if((px + len) > X_MAX){
+  if(!chkBounds(this->px + len, this->py)){
     return false;
   }
   for (int i = 1; txt[i] != 0; i++) {
