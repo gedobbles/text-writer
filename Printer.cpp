@@ -89,7 +89,7 @@ void Printer::pChr(char c){
   std::vector<std::string> results;
   boost::split(results, text, [](char c){return c == ';';});
   for (string move : results) {
-    printf("%s\n", move.c_str());
+    //printf("%s\n", move.c_str()); //DBG
     s->wln(move);
   }
   s->wln("G90");
